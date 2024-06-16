@@ -20,7 +20,7 @@
                 <div class="card mt-3">
                     <div class="card-header">
                         <h4>Users
-                            <a href="{{ url('users/create') }}" class="btn btn-primary float-right" >Add Roles</a>
+                            <a href="{{ url('users/create') }}" class="btn btn-primary float-right" >Add Users</a>
                         </h4>
                     </div>
 
@@ -35,15 +35,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($roles as $role)
+                                @foreach($users as $user)
                                 <tr>
-                                    <td>{{ $role->id }}</td>
-                                    <td>{{ $role->name }}</td>
+                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $user->name }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td>
-                                        <a href="{{ url('roles/'.$role->id.'/give-permissions') }}" class="btn btn-primary">Add/Edit Role Permission</a>
-                                        <a href="{{ url('roles/'.$role->id.'/edit') }}" class="btn btn-primary">Edit</a>
+                                        <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">Edit</a>
                                         <a href="#" class="btn btn-success ">View</a>
-                                        <a href="{{ url('roles/'.$role->id.'/delete') }}" class="btn btn-danger">Delete</a>
+                                        <a href="{{ url('users/'.$user->id.'/delete') }}" class="btn btn-danger">Delete</a>
 
                                     </td>
                                 </tr>
