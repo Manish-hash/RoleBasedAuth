@@ -13,7 +13,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mt-4">
                 @if(session('status'))
                     <div class="alert alert-success">{{ session('status') }}</div>
                 @endif
@@ -31,6 +31,7 @@
                                     <th>ID</th>
                                     <th>Name</th>
                                     <th>Email</th>
+                                    <th>Roles</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>
@@ -40,6 +41,13 @@
                                     <td>{{ $user->id }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->email }}</td>
+                                    <td>
+                                        @if(!empty($user->getRoleNames()))
+                                            @foreach($user->getRoleNames() as $rolename)
+                                            <label class="badge bg-primary mx-1">{{ $rolename }}</label>
+                                            @endforeach
+                                        @endif
+                                    </td>
                                     <td>
                                         <a href="{{ url('users/'.$user->id.'/edit') }}" class="btn btn-primary">Edit</a>
                                         <a href="#" class="btn btn-success ">View</a>
