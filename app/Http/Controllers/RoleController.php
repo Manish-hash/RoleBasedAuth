@@ -4,9 +4,15 @@ namespace App\Http\Controllers;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Routing\Controllers\HasMiddleware;
 use Illuminate\Support\Facades\DB;
+
 class RoleController extends Controller
 {
+
+
+    
     public function index(){
         $roles = Role::get();
         return view('role-permission.role.index',[
@@ -45,7 +51,7 @@ class RoleController extends Controller
         return redirect('roles')->with('status', 'Role updated successfully');
     }
 
-    public function delete($id){
+    public function destroy($id){
         $role = Role::findOrFail($id);
         $role->delete();
         return redirect('roles')->with('status', 'Role Deleted successfully');

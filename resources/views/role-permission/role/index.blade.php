@@ -8,9 +8,13 @@
     <title>Role</title>
 </head>
 <body>
-
-    @include('role-permission.nav-links')
-
+    <x-app-layout>
+    
+        @if(Auth::user()->hasRole('user'))
+        @include('role-permission.user-navlinks')
+    @else
+        @include('role-permission.admin-navlinks')
+    @endif
     <div class="container">
         <div class="row">
             <div class="col-md-12">
@@ -39,11 +43,21 @@
                                     <td>{{ $role->id }}</td>
                                     <td>{{ $role->name }}</td>
                                     <td>
+                                      @role('super-admin')
                                         <a href="{{ url('roles/'.$role->id.'/give-permissions') }}" class="btn btn-primary">Add/Edit Role Permission</a>
+                                        @else
+                                         no access to add/edit permission &#10060
+                                          @endrole
+                                        
+                                        @can('update role')
                                         <a href="{{ url('roles/'.$role->id.'/edit') }}" class="btn btn-primary">Edit</a>
+                                        @endcan
+                                 
+                                        
                                         <a href="#" class="btn btn-success ">View</a>
+                                        @can('delete role')
                                         <a href="{{ url('roles/'.$role->id.'/delete') }}" class="btn btn-danger">Delete</a>
-
+                                        @endcan
                                     </td>
                                 </tr>
                                 @endforeach
@@ -54,9 +68,11 @@
             </div>
         </div>
     </div>
+   
 
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</x-app-layout>
 </body>
 </html>

@@ -68,7 +68,7 @@ public function update(Request $request, User $user){
     return redirect('/users')->with('status','Users Updated successfully with Roles'); 
 }
 
-public function delete($userId){
+public function destroy($userId){
     $user = User::findOrFail($userId);
     $user->delete();
 

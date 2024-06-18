@@ -3,6 +3,12 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
+
+        @if(Auth::user()->hasRole('user'))
+            @include('role-permission.user-navlinks')
+        @else
+            @include('role-permission.admin-navlinks')
+        @endif
     </x-slot>
 
     <div class="py-12">
